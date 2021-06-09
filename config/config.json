@@ -1,0 +1,17 @@
+{
+  "development": {
+    "database": "freebieme",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "database": "freebieme",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "database": "freebieme_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

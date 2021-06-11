@@ -1,13 +1,8 @@
-
+<h1>CREATE POST and then DISPLAY detailed ITEM</h1>
 
 <% if (!locals.username) { %>
   <h1 id="user"></h1>
-  <p>
-      <form action='/location' method="GET">
-          <input hidden name="user" id="userInput" />
-          <button type="submit">Find your location 📍</button>
-      </form>
-  </p>
+
   <script>
       let currentUser = localStorage.getItem('user')
       document.getElementById('user').innerText = `👋 Hello, ${currentUser}`
@@ -16,6 +11,22 @@
   </script>
 <% } else { %>
   <h1>👋 Hello, <%= username %></h1>
+
+  <form enctype="multipart/form-data" action="/banana" method="POST">
+    <input type="file" name="itemImg">
+    <input type="submit" class="btn btn-primary">
+  </form>
+
+  <h4>Upload image</h4>
+  <% if (!imgSrc) { %>
+
+    <img src="https://placekitten.com/200/300" alt="">
+    
+ <% } else { %> 
+  <img src="<%= imgSrc %>" alt="">
+  <% } %> 
+
+
   <p>
       <form action='/location' method="GET">
           <input hidden name="user" value="<%= username %>">

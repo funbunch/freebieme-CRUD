@@ -1,2 +1,34 @@
-<h1>New Image:</h1>
-<%- imgSrc %> 
+
+
+<% if (!locals.username) { %>
+  <h1 id="user"></h1>
+  <p>
+      <form action='/location' method="GET">
+          <input hidden name="user" id="userInput" />
+          <button type="submit">Find your location 📍</button>
+      </form>
+  </p>
+  <script>
+      let currentUser = localStorage.getItem('user')
+      document.getElementById('user').innerText = `👋 Hello, ${currentUser}`
+      document.getElementById('userInput').value = currentUser
+      console.log(`User logged in: ${currentUser}`)
+  </script>
+<% } else { %>
+  <h1>👋 Hello, <%= username %></h1>
+  <p>
+      <form action='/location' method="GET">
+          <input hidden name="user" value="<%= username %>">
+          <button type="submit">Find your location 📍</button>
+      </form>
+  </p>
+  <script>
+      if (!localStorage.getItem('user')) {
+          let user = "<%- username %>"
+          localStorage.setItem('user', user)
+      }
+      
+      let currentUser = localStorage.getItem('user')
+      console.log(`User logged in: ${currentUser}`)
+  </script>
+<% } %>

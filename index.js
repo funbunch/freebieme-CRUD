@@ -17,6 +17,7 @@ app.set('view engine', 'ejs')
 //middlewares
 app.use(layouts)
 app.use(express.static(__dirname + '/public'))
+app.use(express.urlencoded(true))
 
 //routes
 // GET -- show a form that lets user serach for location
@@ -25,13 +26,14 @@ app.get('/', (req, res) => {
 })
 
 //displays profile page for current user
-app.get('profile', (req, res) => {
-  let currentUser = req.body,username
-  res.render('profile,' {username: currentUser })
+app.post('/banana', (req, res) => {
+  let currentUser = req.body.username
+  console.log(req.body.username,'👋🏻')
+  res.render('banana', {username: currentUser })
 })
 
-app.get('/profile', (req, res) => {
-  res.render('profile')
+app.get('/banana', (req, res) => {
+  res.render('banana')
 })
 
 //displays current user loation from db
@@ -48,6 +50,7 @@ app.get('/location', (req, res) => {
   })
 })
 
+//displays image uploaded via form
 app.post('/', upload.single('itemImg'), (req, res) => {
   cloudinary.uploader.upload(req.file.path, (result) => {
     //res.send(result)
@@ -59,6 +62,9 @@ app.post('/', upload.single('itemImg'), (req, res) => {
     res.render('banana', {imgSrc: src })
   })
  
+})
+app.get('/logout', (req, res) => {
+  res.render('index', {logout: true})
 })
 
 app.listen(PORT, () => console.log(`You are listening on ${PORT}`))

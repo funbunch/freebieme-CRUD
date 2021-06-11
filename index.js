@@ -23,13 +23,27 @@ app.use(layouts)
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded(true))
 app.use(methodOverride('_method'))
+app.use('/user', require('./controllers/user.js'))
 
 //routes
 // GET -- show form to create user
 app.get('/', (req, res) => {
   res.render('index')
+  //res.json({ msg: 'hello people'})
 })
 
+// //POST /user -- create a new user post -- redirect to /user/:userId
+// app.post('/user', (req, res) => {
+
+//   console.log(req.body)
+//   res.redirect('/user')
+//   //redirect to /user/:userId
+// })
+
+//GET /user/:userId -- show the user their items and form to create new item (form will post to POST /item)
+// app.get('/user/:userid', (req, res) => {
+//   res.json({msg: 'Show user items'})
+// })
 
 
 //displays profile page for current user
@@ -44,19 +58,19 @@ app.get('/banana', (req, res) => {
   res.render('banana')
 })
 
-//displays current user loation from db
-app.get('/location', (req, res) => {
-  let currentUser = req.query.user
+// //displays current user loation from db
+// app.get('/location', (req, res) => {
+//   let currentUser = req.query.user
 
-  db.user.findAll({
-    where: {
-      username: currentUser
-    }
-  }).then((response) => {
-    let zipcode = response[0].dataValues.zipcode
-    res.render('location', {zipcode: zipcode})
-  })
-})
+//   db.user.findAll({
+//     where: {
+//       username: currentUser
+//     }
+//   }).then((response) => {
+//     let zipcode = response[0].dataValues.zipcode
+//     res.render('location', {zipcode: zipcode})
+//   })
+// })
 
 //displays image uploaded via form
 app.post('/', upload.single('itemImg'), (req, res) => {

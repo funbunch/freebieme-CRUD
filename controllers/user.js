@@ -8,20 +8,24 @@ router.post('/', (req, res) => {
   // let currentUser = req.body.username
   // console.log(req.body.username,'👋🏻')
   // use req.body to find or create new user in db
-
-  // redirect to /user/:userid
-
-  res.send('👋🏻', 'here')
-  // res.redirect('/user/:userId')
+  db.user.findOrCreate({
+    where: {
+      username: req.body.username,
+      zipcode: req.body.zipcode
+    }
+  }).then(([user, wasCreated]) => {
+      // res.redirect('/user/:userId')
+    // console.log(user.get())
+    res.redirect(`/user/${user.get().id}`)
+  })
 })
-
 
 //show the user their items and form to create new item (form will post to POST /item)
 router.get('/:userid', (req, res) => {
 //req.params userid look up user 
-
+let userData = req.params.userid
 //render the profile
-  res.send()
+  res.render('user', {userData:userData})
 })
 
 module.exports = router 

@@ -24,6 +24,7 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded(true))
 app.use(methodOverride('_method'))
 app.use('/user', require('./controllers/user.js'))
+app.use('/item', require('./controllers/item.js'))
 
 //routes
 // GET -- show form to create user

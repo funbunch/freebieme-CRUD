@@ -33,6 +33,12 @@ app.get('/', (req, res) => {
   //res.json({ msg: 'hello people'})
 })
 
+// GET -- show form to create item
+app.get('/', (req, res) => {
+  res.render('index')
+  //res.json({ msg: 'hello people'})
+})
+
 // //POST /user -- create a new user post -- redirect to /user/:userId
 // app.post('/user', (req, res) => {
 
@@ -47,17 +53,17 @@ app.get('/', (req, res) => {
 // })
 
 
-//displays profile page for current user
-app.post('/banana', (req, res) => {
-  let currentUser = req.body.username
-  console.log(req.body.username,'👋🏻')
-  res.render('banana', {username: currentUser })
-})
+// //displays profile page for current user
+// app.post('/banana', (req, res) => {
+//   let currentUser = req.body.username
+//   console.log(req.body.username,'👋🏻')
+//   res.render('banana', {username: currentUser })
+// })
 
-app.get('/banana', (req, res) => {
-  console.log('🐝')
-  res.render('banana')
-})
+// app.get('/banana', (req, res) => {
+//   console.log('🐝')
+//   res.render('banana')
+// })
 
 // //displays current user loation from db
 // app.get('/location', (req, res) => {
@@ -87,20 +93,20 @@ app.post('/', upload.single('itemImg'), (req, res) => {
   })
  
 })
-app.get('/logout', (req, res) => {
-  res.render('index', {logout: true})
-})
+// app.get('/logout', (req, res) => {
+//   res.render('index', {logout: true})
+// })
 
-// Display all items with filter
-app.get('/view-all', (req,res) => {
-  let all = "VIEW ALL ITEMS by CAT or ZIP"
-  res.send(all)
-})
+// // Display all items with filter
+// app.get('/view-all', (req,res) => {
+//   let all = "VIEW ALL ITEMS by CAT or ZIP"
+//   res.send(all)
+// })
 
-app.get('/detail', (req, res) => {
-  let detail = "SHOW DETAIL"
-  res.send(detail)
-})
+// app.get('/detail', (req, res) => {
+//   let detail = "SHOW DETAIL"
+//   res.send(detail)
+// })
 
 app.listen(PORT, () => {
   rowdyResults.print()

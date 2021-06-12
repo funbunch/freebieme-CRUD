@@ -18,6 +18,9 @@ router.post('/', (req, res) => {
     // console.log(user.get())
     res.redirect(`/user/${user.get().id}`)
   })
+  .catch(err => {
+    log(err)
+  })
 })
 
 //show the user their items and form to create new item (form will post to POST /item)

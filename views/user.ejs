@@ -1,19 +1,31 @@
-<div class="container">
+<div class="container text-center">
+
+  <nav class="navbar navbar-light bg-light">
+    <div class="navbar-brand">Navbar</div>
+      <form class="d-flex" method="GET" action="/item">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onwheel="this.blur()">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+  </nav>
 
   <h3>Select Category of item</h3>
 
-  <form method="POST" action="/item">
+  <form enctype="multipart/form-data" method="POST" action="/item">
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-      <option selected>Open this select menu</option>
+      <option selected>Category</option>
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
     </select>
 
     <label>Name of item:</label>
-    <input type="text" name="username"/>
-    <input type="submit" class="btn btn-primary"/>
+    <input type="text" name="username"/><br>
+
+    <input type="file" name="itemImg"><br>
+    <input type="submit" class="btn btn-primary">
+
   </form>
+
 
 
 

@@ -73,19 +73,19 @@ app.get('/', (req, res) => {
 // })
 
 //displays image uploaded via form
-app.post('/', upload.single('itemImg'), (req, res) => {
-  console.log('🎖🇵🇷')
-  cloudinary.uploader.upload(req.file.path, (result) => {
-    //res.send(result)
-    //TODO allow for other imgs besides jpg
-    const imageId = `${result.public_id}.jpg`
-    const src = cloudinary.image(imageId, {width: 151, crop: "scale"})
-    // console.log(result.public_id)
-    console.log(imgSrc, '🥰')
-    res.render('banana', {imgSrc: src })
-  })
+// app.post('/', upload.single('itemImg'), (req, res) => {
+//   console.log('🎖🇵🇷')
+//   cloudinary.uploader.upload(req.file.path, (result) => {
+//     //res.send(result)
+//     //TODO allow for other imgs besides jpg
+//     const imageId = `${result.public_id}.jpg`
+//     const src = cloudinary.image(imageId, {width: 151, crop: "scale"})
+//     // console.log(result.public_id)
+//     console.log(imgSrc, '🥰')
+//     res.render('banana', {imgSrc: src })
+//   })
  
-})
+// })
 // app.get('/logout', (req, res) => {
 //   res.render('index', {logout: true})
 // })

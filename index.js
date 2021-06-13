@@ -26,14 +26,7 @@ app.use(methodOverride('_method'))
 app.use('/user', require('./controllers/user.js'))
 app.use('/item', require('./controllers/item.js'))
 
-//routes
 // GET -- show form to create user
-app.get('/', (req, res) => {
-  res.render('index')
-  //res.json({ msg: 'hello people'})
-})
-
-// GET -- show form to create item
 app.get('/', (req, res) => {
   res.render('index')
   //res.json({ msg: 'hello people'})

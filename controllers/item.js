@@ -6,38 +6,122 @@ const multer = require('multer')
 const upload = multer({ dest: '../uploads/'})
 const cloudinary = require('cloudinary')
 
+router.post("/detail", upload.any("file"), (req, res) => {
+  cloudinary.uploader.upload(req.file, (result) => {
+    let username = req.body.username;
+    console.log(req.body, '⚠️🔴🟢')
+    const imageId = `${result.public_id}.jpg`;
+    const src = cloudinary.image(imageId, { width: 200, crop: "scale" });
+    //get user
+    db.user
+      .findOne({
+        where: {
+          username: username,
+        },
+      })
+      .then((user) => {
+        user
+          .createItem({
+            product: req.body.item,
+            category: req.body.category,
+            image: src,
+          })
+          .then(() => {
+            res.render("detail", { imgSrc: src });
+          })
+          .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
+      })
+      .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
+  });
+});
+// // making an item
+// router.post("/detail", (req, res) => {
+//   // the name of the item
+//   console.log(req.body, '✅✅')
+//   let username = req.body.username;
+//   console.log('post route hit', username)
+//   //get user
+//   db.user
+//     .findOne({
+//       where: {
+//         username: username,
+//       },
+//     })
+//     .then((user) => {
+//       console.log(user, 'USER')
+//       // handle Cloudinary uploads
+//       cloudinary.uploader.upload(req.file.path, (result) => {
+//         console.log(result, "RESULT")
+//         const imageId = `${result.public_id}.jpg`;
+//         const src = cloudinary.image(imageId, { width: 200, crop: "scale" });
+//         user
+//           .createItem({
+//             product: req.body.item,
+//             category: req.body.category,
+//             image: src,
+//           })
+//           .then(() => {
+//             console.log('post route completed', '🐭')
+//             res.render("detail", { imgSrc: src });
+//           })
+//           .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
+//       });
+//     })
+//     .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
+// });
 
-//create a new item 
-router.post('/', upload.single('itemImg'), (req, res) => {
-  console.log('🎖🇵🇷')
-  // let currentUser = req.body.username
-  // console.log(req.body.username,'👋🏻')
-  // use req.body to find or create new user in db
-  cloudinary.uploader.upload(req.file.path, (result) => {
+// //create a new item 
+// router.post('/detail', upload.single('itemImg'), (req, res) => {
+//   console.log('🎖🇵🇷')
+//   let username = req.body.username;
+//   db.user 
+//   .findOne({
+//     where: {
+//       username: username,
+//     },
+//   })
+//   .then((user) => {
+//     user
+//       .createItem({
+//         product: req.body.item,
+//         category: req.body.category,
+//         image:req.body.image
+//       })
+//       .then(() => {
+//         res.redirect(`/detail`);
+//       })
+//       .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
+//     })
+//     .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
+
+//   })
+//   // let currentUser = req.body.username
+//   // console.log(req.body.username,'👋🏻')
+//   // use req.body to find or create new user in db
+//   cloudinary.uploader.upload(req.file.path, (result) => {
    
-    //TODO allow for other imgs besides jpg
-    const imageId = `${result.public_id}.jpg`
-    const src = cloudinary.image(imageId, {width: 200, crop: "scale"})
-    // console.log(result.public_id)
-    // console.log(src, '🥰')
-    // res.send(result)
-    res.render(`user/${user.get().id}`, {imgSrc: src })
-  })
+//     //TODO allow for other imgs besides jpg
+//     const imageId = `${result.public_id}.jpg`
+//     const src = cloudinary.image(imageId, {width: 200, crop: "scale"})
+//     //console.log(result.public_id)
+//     console.log(imageId, '🥰')
+//     // res.send(result)
+//     res.render('detail', {imgSrc: src })
+//   })
 
-  // db.item.create({
-  //   where: {
-  //     product: req.body.product,
-  //     category: req.body.category,
-  //     image:req.body.image 
-  //   }
-  // }).then(([item, wasCreated]) => {
-  //   console.log(item.get())
-  //   //res.redirect(`/user/${user.get().id}`)
-  // })
-  // .catch(err => {
-  //   log(err)
-  // })
-})
+//   db.item.create({
+//     where: {
+//       product: req.body.item,
+//       category: req.body.category,
+//       image:req.body.image 
+//     }
+//   }).then(([item, wasCreated]) => {
+//     console.log(item, '🐙')
+//     //res.redirect(`/user/${user.get().id}`)
+//   })
+//   .catch(err => {
+//     log(err)
+//   })
 
 //GET -show all items in the db (and use req.query to search/sort them) <- your search form has an action to this route
 router.get('/', (req, res) => {

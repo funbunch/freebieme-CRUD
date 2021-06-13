@@ -1,3 +1,4 @@
+<% if (!locals.username) { %>
 <div class="container text-center">
 
   <nav class="navbar navbar-light bg-light">
@@ -8,10 +9,21 @@
       </form>
   </nav>
 
+  <script>
+    let currentUser = localStorage.getItem('user')
+    document.getElementById('user').innerText = `👋 Hello, ${currentUser}`
+    document.getElementById('userInput').value = currentUser
+    console.log(`User logged in: ${currentUser}`)
+  </script>
+
+
   <h3>Select Category of item</h3>
 
-  <form enctype="multipart/form-data" method="POST" action="/item">
-    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+  <form enctype="multipart/form-data" method="POST" action="/item/detail">
+
+    <input id="userInput" type="hidden" name="username" value="user">
+
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
       <option selected>Category</option>
       <option value="1">One</option>
       <option value="2">Two</option>
@@ -19,17 +31,15 @@
     </select>
 
     <label>Name of item:</label>
-    <input type="text" name="username"/><br>
+    <input type="text" name="product"/><br>
 
-    <input type="file" name="itemImg"><br>
+    <input type="file" name="image"><br>
     <input type="submit" class="btn btn-primary">
 
   </form>
 
-
-
-
 </div>
+<% } %>
 
 
 

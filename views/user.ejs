@@ -1,5 +1,6 @@
-<% if (!locals.username) { %>
+
 <div class="container text-center">
+  <h1 id="user"></h1>
 
   <nav class="navbar navbar-light bg-light">
     <div class="navbar-brand">Navbar</div>
@@ -8,7 +9,8 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
   </nav>
-
+  
+  <% if (!locals.username) { %>
   <script>
     let currentUser = localStorage.getItem('user')
     document.getElementById('user').innerText = `👋 Hello, ${currentUser}`
@@ -16,10 +18,12 @@
     console.log(`User logged in: ${currentUser}`)
   </script>
 
-
+  <% } else { %>
+  
+  <h1>👋 Continue here, <%= username %></h1>  
   <h3>Select Category of item</h3>
 
-  <form enctype="multipart/form-data" method="POST" action="/item/detail">
+  <form enctype="multipart/form-data" method="POST" action="/item/:id">
 
     <input id="userInput" type="hidden" name="username" value="user">
 
@@ -37,6 +41,15 @@
     <input type="submit" class="btn btn-primary">
 
   </form>
+  <script>
+    if (!localStorage.getItem('user')) {
+        let user = "<%- username %>"
+        localStorage.setItem('user', user)
+    }
+    
+    let currentUser = localStorage.getItem('user')
+    console.log(`User logged in: ${currentUser}`)
+</script>
 
 </div>
 <% } %>

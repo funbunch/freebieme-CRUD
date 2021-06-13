@@ -7,8 +7,7 @@ const axios = require('axios');
 //create a new user
 router.post('/', (req, res) => {
   let currentUser = req.body.username
-  console.log(req.body.username,'👋🏻')
-  console.log(req.body, '🌐🚺')
+
   // use req.body to find or create new user in db
   db.user.findOrCreate({
     where: {
@@ -22,19 +21,22 @@ router.post('/', (req, res) => {
      res.render('user', { username: currentUser })
     //res.render('user', {userData: userData })
     //res.redirect(`/user/${user.get().id}`)
+    console.log(req.body.username,'👋🏻')
+    console.log(req.body, '🌐🚺')
   })
   .catch(err => {
-    console.log(err)
+    console.log(err, '🔵')
   })
 })
 
 //show the user their items and form to create new item (form will post to POST /item)
-// router.get('/:userid', (req, res) => {
-// //req.params userid look up user 
-// let userData = req.params.userid
-// //render the profile
-//   res.render('user', {userData:userData})
-// })
+router.get('/:userid', (req, res) => {
+//req.params userid look up user 
+let userData = req.params.userid
+//render the profile
+res.render(`/user/${user.get().id}`)
+  //res.render('user', {userData:userData})
+})
 
 
 module.exports = router 

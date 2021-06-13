@@ -6,7 +6,7 @@ const multer = require('multer')
 const upload = multer({ dest: '../uploads/'})
 const cloudinary = require('cloudinary')
 
-router.post("/detail", upload.any("file"), (req, res) => {
+router.post("/:id", upload.any("file"), (req, res) => {
   cloudinary.uploader.upload(req.file, (result) => {
     let username = req.body.username;
     console.log(req.body, '⚠️🔴🟢')
@@ -16,8 +16,8 @@ router.post("/detail", upload.any("file"), (req, res) => {
     db.user
       .findOne({
         where: {
-          username: username,
-        },
+          username: req.body.username
+        }
       })
       .then((user) => {
         user
@@ -27,13 +27,22 @@ router.post("/detail", upload.any("file"), (req, res) => {
             image: src,
           })
           .then(() => {
-            res.render("detail", { imgSrc: src });
+            res.redirect('item/:id')
+            //res.render("detail", { imgSrc: src });
           })
           .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
       })
       .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
   });
 });
+
+router.get('/:id', (req, res) => {
+  let itemData = req.params.id
+  console.log(itemData, '🔸')
+   res.render('item', { itemData:itemData, imgSrc: src })
+  })
+
+
 // // making an item
 // router.post("/detail", (req, res) => {
 //   // the name of the item

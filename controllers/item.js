@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
@@ -7,10 +8,11 @@ const upload = multer({ dest: '../uploads/'})
 const cloudinary = require('cloudinary')
 
 router.post("/:id", upload.any("file"), (req, res) => {
-  cloudinary.uploader.upload(req.file, (result) => {
+  cloudinary.uploader.upload(req.image, (result) => {
     let username = req.body.username;
     console.log(req.body, '⚠️🔴🟢')
     const imageId = `${result.public_id}.jpg`;
+    console.log(imageId)
     const src = cloudinary.image(imageId, { width: 200, crop: "scale" });
     //get user
     db.user
@@ -22,13 +24,14 @@ router.post("/:id", upload.any("file"), (req, res) => {
       .then((user) => {
         user
           .createItem({
-            product: req.body.item,
+            product: req.body.product,
             category: req.body.category,
             image: src,
           })
           .then(() => {
-            res.redirect('item/:id')
-            //res.render("detail", { imgSrc: src });
+            console.log(src)
+            //res.redirect('item/:id')
+            res.render("item", { imgSrc: src });
           })
           .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
       })

@@ -1,7 +1,5 @@
-
 <div class="container text-center">
   <h1 id="user"></h1>
-
   <nav class="navbar navbar-light bg-light">
     <div class="navbar-brand">Navbar</div>
       <form class="d-flex" method="GET" action="/item">
@@ -9,7 +7,6 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
   </nav>
-  
   <% if (!locals.username) { %>
   <script>
     let currentUser = localStorage.getItem('user')
@@ -17,44 +14,29 @@
     document.getElementById('userInput').value = currentUser
     console.log(`User logged in: ${currentUser}`)
   </script>
-
   <% } else { %>
-  
   <h1>👋 Continue here, <%= username %></h1>  
   <h3>Select Category of item</h3>
-
   <form enctype="multipart/form-data" method="POST" action="/item/:id">
-
-    <input id="userInput" type="hidden" name="username" value="user">
-
+    <input id="userInput" type="hidden" name="username" value="<%= username %>">
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
       <option selected>Category</option>
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
     </select>
-
     <label>Name of item:</label>
     <input type="text" name="product"/><br>
-
     <input type="file" name="image"><br>
     <input type="submit" class="btn btn-primary">
-
   </form>
   <script>
     if (!localStorage.getItem('user')) {
         let user = "<%- username %>"
         localStorage.setItem('user', user)
     }
-    
     let currentUser = localStorage.getItem('user')
     console.log(`User logged in: ${currentUser}`)
 </script>
-
 </div>
 <% } %>
-
-
-
-
-

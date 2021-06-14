@@ -5,23 +5,50 @@ const axios = require('axios');
 
 
 //create a new user
-router.post('/', async (req, res) => {
-  const newUser = await db.user.findOrCreate({
+router.post('/', (req, res) => {
+  let username = req.body.username
+  db.user.findOrCreate({
     where: {
       username: req.body.username,
       zipcode: req.body.zipcode
     }
   })
-  //console.log('NEWUSER IN POST', newUser)
-  res.render('user', { username: req.body.username })
-})
+  .then(([newUser, newUserCreated]) => {
+      //console.log('NEWUSER IN POST', newUser)
+      //console.log(newUser.id, '🔥')
+      res.redirect(`/user/${newUser.id}`)
+    })
+  })
 
 //show the user their items and form to create new item (form will post to POST /item)
-router.get('/:userid', (req, res) => {
+router.get('/:userId', (req, res) => {
 //req.params userid look up user 
-let userData = req.params.userid
+let userData = req.params.userId
+//console.log('🌕🌕🌕🌕🌕🌕🌕🌕')
+//console.log(userData)
+db.item.findAll( {
+  where: {
+    userId:userData
+  }
+})
+.then(foundItems => {
+  db.user
+    .findOne({
+      where: {
+        id: userData
+      }
+      
+  }).then(foundUser => {
+    console.log(foundItems)
+    res.render('user', { foundItems: foundItems, username: foundUser.username })
+  })
+})
+  //console.log(foundItems)
+  //res.send("hit the route")
+
 //render the profile
-res.render(`/user/${user.get().id}`)
+
+//res.render("user", { imgSrc: src, newItem:newItem })
   //res.render('user', {userData:userData})
 })
 

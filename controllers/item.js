@@ -33,6 +33,8 @@ router.post("/:id", upload.single("image"), (req, res) => {
           
           .then((newItem) => {
             //console.log(newItem)
+            console.log('🌕🌕🌕🌕🌕🌕🌕🌕')
+            console.log(newItem)
             res.redirect(`/user/${newItem.get().userId}`)
             //res.render("item", { imgSrc: src, newItem:newItem });
           })

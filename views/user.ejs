@@ -11,6 +11,7 @@
   <% } else { %>
   <h1>👋 Continue here, <%= username %></h1>  
   <h3>Select Category of item</h3>
+  
   <form enctype="multipart/form-data" method="POST" action="/item/:id">
     <input id="userInput" type="hidden" name="username" value="<%= username %>">
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">

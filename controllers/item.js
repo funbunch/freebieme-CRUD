@@ -7,12 +7,14 @@ const multer = require('multer')
 const upload = multer({ dest: '../uploads/'})
 const cloudinary = require('cloudinary')
 
-router.post("/:id", upload.any("file"), (req, res) => {
-  cloudinary.uploader.upload(req.image, (result) => {
+router.post("/:id", upload.single("image"), (req, res) => {
+  console.log(req.file, '♍️')
+  cloudinary.uploader.upload(req.file.path, (result) => {
     let username = req.body.username;
-    console.log(req.body, '⚠️🔴🟢')
+    //console.log(req.body, '⚠️🔴🟢')
     const imageId = `${result.public_id}.jpg`;
     console.log(imageId)
+    //console.log(result, '☢️💜')
     const src = cloudinary.image(imageId, { width: 200, crop: "scale" });
     //get user
     db.user
@@ -28,14 +30,14 @@ router.post("/:id", upload.any("file"), (req, res) => {
             category: req.body.category,
             image: src,
           })
-          .then(() => {
-            console.log(src)
-            //res.redirect('item/:id')
-            res.render("item", { imgSrc: src });
+          
+          .then((newItem) => {
+            //console.log(newItem)
+            res.redirect(`/user/${newItem.get().userId}`)
+            //res.render("item", { imgSrc: src, newItem:newItem });
           })
           .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
       })
-      .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
   });
 });
 

@@ -1,12 +1,6 @@
 <div class="container text-center">
   <h1 id="user"></h1>
-  <nav class="navbar navbar-light bg-light">
-    <div class="navbar-brand">Navbar</div>
-      <form class="d-flex" method="GET" action="/item">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onwheel="this.blur()">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-  </nav>
+  <%- include( 'partials/navbar') %>
   <% if (!locals.username) { %>
   <script>
     let currentUser = localStorage.getItem('user')

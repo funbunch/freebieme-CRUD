@@ -1,38 +1,38 @@
-  <h1 id="user"></h1>
-  <%- include( 'partials/navbar') %>
+   <%- include( 'partials/navbar') %>
 
    <% if (created) { %>
-    <h1>👋 Welcome back, <%= username %></h1>
+    <h2>👋 Welcome back, <%= username %></h2>
    <% } %>
 
-  <h3>Select Category of item</h3>
-  
-  <form enctype="multipart/form-data" method="POST" action="/item/:id">
-    <input id="userInput" type="hidden" name="username" value="<%= username %>">
-    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
-      <option selected>Category</option>
-      <option value="Electronics & Media">Electronics & Media</option>
-      <option value="Home & Garden">Home &amp; Garden</option>
-      <option value="Clothing & Accessories">Clothing &amp; Accessories</option>
-      <option value="Baby & Kids">Baby &amp; Kids</option>
-      <option value="Vehicles">Vehicles</option>
-      <option value="Toys, Games, & Hobbies">Toys, Games, &amp; Hobbies</option>
-      <option value="Sports & Outdoors">Sports &amp; Outdoors</option>
-      <option value="Collectibles & Art">Collectibles &amp; Art</option>
-      <option value="Pet supplies">Pet supplies</option>
-      <option value="Health & Beauty">Health &amp; Beauty</option>
-    </select>
-    <label>Name of item:</label>
-    <input type="text" name="product"/><br>
-    <label for="item">Description:</label><br>
-    <textarea name="description" rows="4" cols="50">
-    </textarea>
-        
-    <input type="file" name="image"><br>
-    <input type="submit" class="btn btn-primary">
-  </form>
+  <h6>Select Category of item:</h6>
+  <div class="offset-sm-3 col-sm-6 mb-5">
+    <form enctype="multipart/form-data" method="POST" action="/item/:id">
+      <input class="form-control" id="userInput" type="hidden" name="username" value="<%= username %>">
+      <select class="form-select form-select-md mb-3" aria-label=".form-select-md example" name="category">
+        <option selected>Category</option>
+        <option value="Electronics & Media">Electronics & Media</option>
+        <option value="Home & Garden">Home &amp; Garden</option>
+        <option value="Clothing & Accessories">Clothing &amp; Accessories</option>
+        <option value="Baby & Kids">Baby &amp; Kids</option>
+        <option value="Vehicles">Vehicles</option>
+        <option value="Toys, Games, & Hobbies">Toys, Games, &amp; Hobbies</option>
+        <option value="Sports & Outdoors">Sports &amp; Outdoors</option>
+        <option value="Collectibles & Art">Collectibles &amp; Art</option>
+        <option value="Pet supplies">Pet supplies</option>
+        <option value="Health & Beauty">Health &amp; Beauty</option>
+      </select>
+      <label class="form-label">Name of item:</label>
+      <input class="form-control mb-3" type="text" name="product"/>
+      <label class="form-label" for="item">Description:</label>
+      <textarea class="form-control mb-3" name="description" rows="4" cols="50">
+      </textarea>
+      <label class="form-label">Upload image:</label>  
+      <input class="form-control mb-4" type="file" name="image">
+      <input class="btn" type="submit" />
+    </form>
+  </div>
 
-  <div class="album py-5 bg-light">
+  <div class="offset-sm-3 col-sm-6 album py-5 bg-light">
     <div class="container">
   
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -54,7 +54,6 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                 </div>
               </div>
             </div>

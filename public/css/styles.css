@@ -27,11 +27,14 @@ h1 {
   font-family: 'Lobster', cursive;
   font-size: 3.5rem;
   color: rgb(72,166,127);
+  margin: 2rem 0;
+}
+h2 {
+  font-family: 'Lobster', cursive;
+  color: rgb(72,166,127);
   margin-bottom: 2rem;
 }
-h3 {
-  color: #ffffff;
-}
+
 p, label { 
   color: #ffffff;
 }

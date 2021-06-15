@@ -13,7 +13,7 @@ router.post("/:id", upload.single("image"), (req, res) => {
     let username = req.body.username;
     //console.log(req.body, '⚠️🔴🟢')
     const imageId = `${result.public_id}.jpg`;
-    console.log(imageId)
+    //console.log(imageId)
     //console.log(result, '☢️💜')
     const src = cloudinary.image(imageId, { width: 200, crop: "scale" });
     //get user
@@ -28,6 +28,7 @@ router.post("/:id", upload.single("image"), (req, res) => {
           .createItem({
             product: req.body.product,
             category: req.body.category,
+            description: req.body.description,
             image: src,
           })
           
@@ -45,7 +46,7 @@ router.post("/:id", upload.single("image"), (req, res) => {
 
 router.get('/:id', (req, res) => {
   let itemData = req.params.id
-  console.log(itemData, '🔸')
+  //console.log(itemData, '🔸')
    res.render('item', { itemData:itemData, imgSrc: src })
   })
 
@@ -63,6 +64,15 @@ router.delete('/:id/user/:userid', (req, res) => {
     res.redirect(`/user/${userid}`)
   })
 })
+
+router.get('/', (req, res) => {
+  res.send('Find All')
+  // db.item.findAll( {
+
+  // }
+   //res.render('item', { itemData:itemData, imgSrc: src })
+  })
+
 
 
 // // making an item

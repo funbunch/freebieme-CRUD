@@ -1,44 +1,33 @@
-<div class="container text-center">
   <h1 id="user"></h1>
   <%- include( 'partials/navbar') %>
-  <script>
-    if (!localStorage.getItem('user')) {
-        let user = "<%- username %>"
-        localStorage.setItem('user', user)
-    }
-    let currentUser = localStorage.getItem('user')
-    console.log(`User logged in: ${currentUser}`)
-    console.log(locals.username)
-</script>
-  <% if (!locals) { %>
-  <script>
-    let currentUser = localStorage.getItem('user')
-    document.getElementById('user').innerText = `👋 Hello, ${currentUser}`
-    //document.getElementById('userInput').value = currentUser
-    console.log(`User logged in: ${currentUser}`)
-    console.log(`HERE`)
-  </script>
-  <% } else { %>
-  <h1>👋 Continue here, <%= username %></h1>
+
+   <% if (created) { %>
+    <h1>👋 Welcome back, <%= username %></h1>
+   <% } %>
+
   <h3>Select Category of item</h3>
   
   <form enctype="multipart/form-data" method="POST" action="/item/:id">
     <input id="userInput" type="hidden" name="username" value="<%= username %>">
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
       <option selected>Category</option>
-      <option value="1">Electronics & Media</option>
-      <option value="2">Home &amp; Garden</option>
-      <option value="3">Clothing &amp; Accessories</option>
-      <option value="4">Baby &amp; Kids</option>
-      <option value="5">Vehicles</option>
-      <option value="6">Toys, Games, &amp; Hobbies</option>
-      <option value="7">Sports &amp; Outdoors</option>
-      <option value="8">Collectibles &amp; Art</option>
-      <option value="9">Pet supplies</option>
-      <option value="10">Health &amp; Beauty</option>
+      <option value="Electronics & Media">Electronics & Media</option>
+      <option value="Home & Garden">Home &amp; Garden</option>
+      <option value="Clothing & Accessories">Clothing &amp; Accessories</option>
+      <option value="Baby & Kids">Baby &amp; Kids</option>
+      <option value="Vehicles">Vehicles</option>
+      <option value="Toys, Games, & Hobbies">Toys, Games, &amp; Hobbies</option>
+      <option value="Sports & Outdoors">Sports &amp; Outdoors</option>
+      <option value="Collectibles & Art">Collectibles &amp; Art</option>
+      <option value="Pet supplies">Pet supplies</option>
+      <option value="Health & Beauty">Health &amp; Beauty</option>
     </select>
     <label>Name of item:</label>
     <input type="text" name="product"/><br>
+    <label for="item">Description:</label><br>
+    <textarea name="description" rows="4" cols="50">
+    </textarea>
+        
     <input type="file" name="image"><br>
     <input type="submit" class="btn btn-primary">
   </form>
@@ -52,11 +41,12 @@
           <div class="card shadow-sm">
             <div class="card-body">
               <p class="card-title">
-                <% foundItems.forEach(item  => { %>
-                  <p class="card-text"><%= item.product %></p>
+                <% foundItems.forEach(item => { %>
                   <p class="card-text"><%= item.category %></p>
+                  <p class="card-text"><%= item.product %></p>
+                  <p class="card-text"><%= item.description %></p>
                   <%- item.image %>
-                  <form method="POST" action='/item/<%= item.id %>/user/<%= userId %>/?_method=DELETE'>
+                  <form method="POST" action="/item/<%= item.id %>/user/<%= userId %>/?_method=DELETE">
                     <input class="btn btn-dark" type="submit" value="Delete <%= item.id %>">
                   </form>          
               <% }) %>
@@ -75,6 +65,3 @@
       </div>
     </div>
   </div>
-  
-</div>
-<% } %>

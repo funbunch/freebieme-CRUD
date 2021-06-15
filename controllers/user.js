@@ -13,10 +13,10 @@ router.post('/', (req, res) => {
       zipcode: req.body.zipcode
     }
   })
-  .then(([newUser, newUserCreated]) => {
+  .then(([newUser, wasCreated]) => {
       //console.log('NEWUSER IN POST', newUser)
-      //console.log(newUser.id, '🔥')
-      res.redirect(`/user/${newUser.id}`)
+      //console.log(newUserFound, '🔥')
+      res.redirect(`/user/${newUser.id}?created=${wasCreated}`)
     })
     .catch(err => {
       console.log(err)
@@ -26,6 +26,9 @@ router.post('/', (req, res) => {
 //show the user their items and form to create new item (form will post to POST /item)
 router.get('/:userId', (req, res) => {
 //req.params userid look up user 
+if (req.query) {
+  console.log(req.query)
+}
 let userId = req.params.userId
 //console.log('🌕🌕🌕🌕🌕🌕🌕🌕')
 //console.log(userData)
@@ -43,7 +46,7 @@ db.item.findAll( {
       
   }).then(foundUser => {
     console.log("==== founditems", foundItems)
-    res.render('user', { foundItems: foundItems, username: foundUser.username, userId:userId })
+    res.render('user', { foundItems: foundItems, username: foundUser.username, userId:userId, created:req.query.created })
   })
 })
   //console.log(foundItems)

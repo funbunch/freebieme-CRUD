@@ -1,7 +1,7 @@
 body {
-  background: #000;
   background: rgb(3,16,39);
   text-align:center;
+  color: #ffffff;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -14,16 +14,33 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+.container {
+  padding-top: 25px;
+}
+.navbar {
+  justify-content: flex-end;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
 h1 {
   font-family: 'Lobster', cursive;
   font-size: 3.5rem;
-  color: rgb(72,166,127)
+  color: rgb(72,166,127);
+  margin-bottom: 2rem;
 }
 h3 {
   color: #ffffff;
 }
 p, label { 
   color: #ffffff;
+}
+.card-body p {
+  color: #000;
+}
+.btn {
+  background:rgb(72,166,127);
+  color: #fff;
 }
 
 .bd-placeholder-img {

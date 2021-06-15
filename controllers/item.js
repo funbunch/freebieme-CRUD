@@ -49,6 +49,21 @@ router.get('/:id', (req, res) => {
    res.render('item', { itemData:itemData, imgSrc: src })
   })
 
+  //DELETE
+router.delete('/:id/user/:userid', (req, res) => {
+  console.log("===== delete", req.params)
+  const itemData = req.params.id
+  const userid = req.params.userid
+  db.item.destroy({
+    where: {
+      id: itemData
+    }
+  })
+  .then(response => {
+    res.redirect(`/user/${userid}`)
+  })
+})
+
 
 // // making an item
 // router.post("/detail", (req, res) => {

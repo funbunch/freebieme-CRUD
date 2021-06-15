@@ -25,6 +25,8 @@ app.use(express.urlencoded(true))
 app.use(methodOverride('_method'))
 app.use('/user', require('./controllers/user.js'))
 app.use('/item', require('./controllers/item.js'))
+app.locals.username = 'billy'
+console.log(app.locals)
 
 // GET -- show form to create user
 app.get('/', (req, res) => {

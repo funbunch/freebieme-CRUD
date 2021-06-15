@@ -18,29 +18,32 @@ router.post('/', (req, res) => {
       //console.log(newUser.id, '🔥')
       res.redirect(`/user/${newUser.id}`)
     })
+    .catch(err => {
+      console.log(err)
+    })
   })
 
 //show the user their items and form to create new item (form will post to POST /item)
 router.get('/:userId', (req, res) => {
 //req.params userid look up user 
-let userData = req.params.userId
+let userId = req.params.userId
 //console.log('🌕🌕🌕🌕🌕🌕🌕🌕')
 //console.log(userData)
 db.item.findAll( {
   where: {
-    userId:userData
+    userId:userId
   }
 })
 .then(foundItems => {
   db.user
     .findOne({
       where: {
-        id: userData
+        id: userId
       }
       
   }).then(foundUser => {
-    console.log(foundItems)
-    res.render('user', { foundItems: foundItems, username: foundUser.username })
+    console.log("==== founditems", foundItems)
+    res.render('user', { foundItems: foundItems, username: foundUser.username, userId:userId })
   })
 })
   //console.log(foundItems)

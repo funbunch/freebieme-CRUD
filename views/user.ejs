@@ -8,25 +8,34 @@
     }
     let currentUser = localStorage.getItem('user')
     console.log(`User logged in: ${currentUser}`)
+    console.log(locals.username)
 </script>
-  <% if (!locals.username) { %>
+  <% if (!locals) { %>
   <script>
     let currentUser = localStorage.getItem('user')
     document.getElementById('user').innerText = `👋 Hello, ${currentUser}`
     //document.getElementById('userInput').value = currentUser
     console.log(`User logged in: ${currentUser}`)
+    console.log(`HERE`)
   </script>
   <% } else { %>
-  <h1>👋 Continue here, <%= username %></h1>  
+  <h1>👋 Continue here, <%= username %></h1>
   <h3>Select Category of item</h3>
   
   <form enctype="multipart/form-data" method="POST" action="/item/:id">
     <input id="userInput" type="hidden" name="username" value="<%= username %>">
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
       <option selected>Category</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option value="1">Electronics & Media</option>
+      <option value="2">Home &amp; Garden</option>
+      <option value="3">Clothing &amp; Accessories</option>
+      <option value="4">Baby &amp; Kids</option>
+      <option value="5">Vehicles</option>
+      <option value="6">Toys, Games, &amp; Hobbies</option>
+      <option value="7">Sports &amp; Outdoors</option>
+      <option value="8">Collectibles &amp; Art</option>
+      <option value="9">Pet supplies</option>
+      <option value="10">Health &amp; Beauty</option>
     </select>
     <label>Name of item:</label>
     <input type="text" name="product"/><br>
@@ -41,14 +50,15 @@
         
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-  
             <div class="card-body">
               <p class="card-title">
-                <% foundItems.forEach(item => { %>
+                <% foundItems.forEach(item  => { %>
                   <p class="card-text"><%= item.product %></p>
                   <p class="card-text"><%= item.category %></p>
                   <%- item.image %>
+                  <form method="POST" action='/item/<%= item.id %>/user/<%= userId %>/?_method=DELETE'>
+                    <input class="btn btn-dark" type="submit" value="Delete <%= item.id %>">
+                  </form>          
               <% }) %>
               
               <div class="d-flex justify-content-between align-items-center">

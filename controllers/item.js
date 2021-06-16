@@ -65,12 +65,16 @@ router.delete('/:id/user/:userid', (req, res) => {
   })
 })
 
-router.get('/', (req, res) => {
-  res.send('Find All')
+router.get('/view-all', (req, res) => {
+  // const itemData = req.params.id
+  // const userid = req.params.userid
+  // console.log(itemData)
+    console.log("HITTTTT")
+    res.send('Find All')
   // db.item.findAll( {
 
   // }
-   //res.render('item', { itemData:itemData, imgSrc: src })
+  //res.render('view-all', { itemData:itemData, imgSrc: src })
   })
 
 

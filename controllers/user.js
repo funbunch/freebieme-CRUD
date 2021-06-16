@@ -46,7 +46,7 @@ db.item.findAll( {
       
   }).then(foundUser => {
     console.log("==== founditems", foundItems)
-    res.render('user', { foundItems: foundItems, username: foundUser.username, userId:userId, created:req.query.created })
+    res.render('user', { foundItems: foundItems, username: foundUser.username, userId:userId, zipcode:foundUser.zipcode, created:req.query.created })
   })
 })
   //console.log(foundItems)

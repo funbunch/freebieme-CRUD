@@ -27,8 +27,13 @@ h1 {
   font-family: 'Lobster', cursive;
   font-size: 3.5rem;
   color: rgb(72,166,127);
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
 }
+.logo {
+  padding-top: 90px;
+  padding-bottom: 35px;
+}
+
 h2 {
   font-family: 'Lobster', cursive;
   color: rgb(72,166,127);
@@ -38,12 +43,18 @@ h2 {
 p, label { 
   color: #ffffff;
 }
+.main {
+  padding-top: 60px;
+}
 .card-body p {
   color: #000;
 }
 .btn {
   background:rgb(72,166,127);
   color: #fff;
+}
+footer{
+  font-size: 10px;
 }
 
 .bd-placeholder-img {

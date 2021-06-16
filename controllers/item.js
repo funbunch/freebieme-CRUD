@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require('../models');
 const axios = require('axios');
 const multer = require('multer') 
-const upload = multer({ dest: '../uploads/'})
+const upload = multer({ dest: '/app/uploads/'})
 const cloudinary = require('cloudinary')
 
 router.post("/:id", upload.single("image"), (req, res) => {

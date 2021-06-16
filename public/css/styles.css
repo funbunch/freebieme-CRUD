@@ -1,8 +1,23 @@
+html {
+  height:100%;
+}
+
 body {
+  height:100%;
   background: rgb(3,16,39);
   text-align:center;
   color: #ffffff;
   font-family: 'Open Sans', sans-serif;
+}
+
+section {
+  height: 100%
+}
+
+.wrapper {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 /* prevent input scroll arrows */
@@ -27,9 +42,13 @@ h1 {
   font-family: 'Lobster', cursive;
   font-size: 3.5rem;
   color: rgb(72,166,127);
-  /* margin: 2rem 0; */
 }
-.logo {
+
+.login h1 {
+  padding: 3rem 0;
+}
+
+.logo h1 {
   padding-top: 90px;
   padding-bottom: 35px;
 }
@@ -43,6 +62,10 @@ h2 {
 p, label { 
   color: #ffffff;
 }
+.strike {
+  text-decoration: line-through;
+  text-decoration-color: #000;
+}
 .main {
   padding-top: 60px;
 }
@@ -53,8 +76,16 @@ p, label {
   background:rgb(72,166,127);
   color: #fff;
 }
+.posted-item .col:last-child {
+  padding-bottom: 2rem;
+}
 footer{
+  padding: 15px;
+
+}
+footer p {
   font-size: 10px;
+  float: right;
 }
 
 .bd-placeholder-img {

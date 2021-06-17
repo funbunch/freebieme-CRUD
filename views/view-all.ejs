@@ -21,8 +21,8 @@
       </div>
     </div>
   </div>
-  <% } else { %>
+  <% } else if (!user.zipcode) { %>
     <div class="container">
-      <p>No items found in zipcode</p> 
+      <p>Sorry, no items found in zipcode.</p> 
     </div> 
   <% } %>

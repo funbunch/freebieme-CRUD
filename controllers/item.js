@@ -74,7 +74,7 @@ router.get('/view-all', (req, res) => {
         zipcode: req.query.zipcode
       }
     }).then(foundUsers => {
-      console.log(foundUsers)
+      console.log(foundUsers, "ZIP????")
       Array.from(foundUsers).forEach(user => {
         db.item
           .findAll({

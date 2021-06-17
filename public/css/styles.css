@@ -58,6 +58,9 @@ h2 {
   color: rgb(72,166,127);
   margin-bottom: 2rem;
 }
+h6 {
+  margin-bottom: 1rem;
+}
 
 p, label { 
   color: #ffffff;
@@ -107,6 +110,10 @@ footer p {
     padding-left: 25px;
     padding-right: 25px;
   }  
+  .item-post {
+    width: 90%;
+    margin: 0 auto;
+  }
 }
 
   @media (min-width: 768px) {

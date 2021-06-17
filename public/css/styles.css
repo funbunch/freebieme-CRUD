@@ -66,6 +66,10 @@ p, label {
   text-decoration: line-through;
   text-decoration-color: #000;
 }
+.copy {
+  padding-left: 25px;
+  padding-right: 25px;
+}
 
 form#sign-up {
   width: 50%;

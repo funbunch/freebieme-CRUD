@@ -49,11 +49,6 @@ db.item.findAll( {
     res.render('user', { foundItems: foundItems, username: foundUser.username, userId:userId, zipcode:foundUser.zipcode, created:req.query.created })
   })
 })
-  //console.log(foundItems)
-  //res.send("hit the route")
-
-//render the profile
-
 //res.render("user", { imgSrc: src, newItem:newItem })
   //res.render('user', {userData:userData})
 })

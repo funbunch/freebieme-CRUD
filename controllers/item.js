@@ -44,11 +44,11 @@ router.post("/:id", upload.single("image"), (req, res) => {
   });
 });
 
-router.get('/:id', (req, res) => {
-  let itemData = req.params.id
-  //console.log(itemData, '🔸')
-   res.render('item', { itemData:itemData, imgSrc: src })
-  })
+// router.get('/:id', (req, res) => {
+//   let itemData = req.params.id
+//   //console.log(itemData, '🔸')
+//    res.render('item', { itemData:itemData, imgSrc: src })
+//   })
 
   //DELETE
 router.delete('/:id/user/:userid', (req, res) => {
@@ -65,19 +65,29 @@ router.delete('/:id/user/:userid', (req, res) => {
   })
 })
 
+//GET -show all items in the db (and use req.query to search/sort them) <- your search form has an action to this route
 router.get('/view-all', (req, res) => {
-  // const itemData = req.params.id
-  // const userid = req.params.userid
-  // console.log(itemData)
-    console.log("HITTTTT")
-    res.send('Find All')
-  // db.item.findAll( {
-
-  // }
-  //res.render('view-all', { itemData:itemData, imgSrc: src })
-  })
-
-
+  //console.log(req.query)
+    //res.send('Find All')
+    db.user.findAll( {
+      where: {
+        zipcode: req.query.zipcode
+      }
+    }).then(foundUsers => {
+      console.log(foundUsers)
+      Array.from(foundUsers).forEach(user => {
+        db.item
+          .findAll({
+            where: {
+              userId:user.id
+            }
+          }).then(usersItems => {
+            //console.log(usersItems, "USERSITEMS")
+            res.render('view-all', {usersItems:usersItems})
+          })
+        })
+      })
+    })
 
 // // making an item
 // router.post("/detail", (req, res) => {
@@ -140,33 +150,7 @@ router.get('/view-all', (req, res) => {
 //     .catch((error) => console.log(error, "🚑🚑🚑 error 🚑🚑🚑"));
 
 //   })
-//   // let currentUser = req.body.username
-//   // console.log(req.body.username,'👋🏻')
-//   // use req.body to find or create new user in db
-//   cloudinary.uploader.upload(req.file.path, (result) => {
-   
-//     //TODO allow for other imgs besides jpg
-//     const imageId = `${result.public_id}.jpg`
-//     const src = cloudinary.image(imageId, {width: 200, crop: "scale"})
-//     //console.log(result.public_id)
-//     console.log(imageId, '🥰')
-//     // res.send(result)
-//     res.render('detail', {imgSrc: src })
-//   })
 
-//   db.item.create({
-//     where: {
-//       product: req.body.item,
-//       category: req.body.category,
-//       image:req.body.image 
-//     }
-//   }).then(([item, wasCreated]) => {
-//     console.log(item, '🐙')
-//     //res.redirect(`/user/${user.get().id}`)
-//   })
-//   .catch(err => {
-//     log(err)
-//   })
 
 //GET -show all items in the db (and use req.query to search/sort them) <- your search form has an action to this route
 router.get('/', (req, res) => {
@@ -182,19 +166,19 @@ router.get('/', (req, res) => {
 
 //PUT /item/:itemId -- update one item with id of :itemId -- redirect to /user/:userId (show user the item they edited)
 
-//?? item or user
-router.put('/:userid', (req, res) => {
+// item or user?
+// router.put('/:userid', (req, res) => {
 
-  //find one from req.params.id and us the req body to update
-  itemData[req.params.id].userid = req.body.userid
-  itemData[req.params.id].product = req.body.product
-  itemData[req.params.id].category = req.body.category
-  itemData[req.params.id].img = req.body.img
+//   //find one from req.params.id and us the req body to update
+//   itemData[req.params.id].userid = req.body.userid
+//   itemData[req.params.id].product = req.body.product
+//   itemData[req.params.id].category = req.body.category
+//   itemData[req.params.id].img = req.body.img
 
-  //redirect 
-  res.redirect('/:userid')  
+//   //redirect 
+//   res.redirect('/:userid')  
   
-  })
+//   })
 
 
 

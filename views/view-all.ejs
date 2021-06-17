@@ -1,3 +1,28 @@
 <h1>VIEW ALL ITEMS by CAT or ZIP</h1>
 
-Redirect on click to detail
+<% if (usersItems ) { %>
+  <div class="offset-sm-3 col-sm-6">
+    <div class="container">
+      <div class="posted-item row g-5">
+        <% usersItems.forEach(user => { %>     
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text"><%= user.category %></p>
+              <p class="card-text"><%= user.product %></p>
+              <p class="card-text"><%= user.description %></p>
+              <p class="card-text">Located in: <%= user.zipcode %></p>
+              <div class="img-fluid"><%- user.image %></div> 
+              </div>
+            </div>
+          </div>         
+        <% }) %>
+    
+      </div>
+    </div>
+  </div>
+  <% } else { %>
+    <div class="container">
+      <p>No items found in zipcode</p> 
+    </div> 
+  <% } %>

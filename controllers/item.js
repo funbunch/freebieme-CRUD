@@ -74,19 +74,26 @@ router.get('/view-all', (req, res) => {
         zipcode: req.query.zipcode
       }
     }).then(foundUsers => {
-      console.log(foundUsers, "ZIP????")
-      Array.from(foundUsers).forEach(user => {
-        db.item
-          .findAll({
-            where: {
-              userId:user.id
-            }
-          }).then(usersItems => {
-            //console.log(usersItems, "USERSITEMS")
-            res.render('view-all', {usersItems:usersItems})
+      //console.log(foundUsers.length, "ZIP????")
+      if (foundUsers.length > 0) {
+        Array.from(foundUsers).forEach(user => {
+          db.item
+            .findAll({
+              where: {
+                userId:user.id
+              }
+            }).then(usersItems => {
+              //console.log(usersItems.length, "USERSITEMS")
+              res.render('view-all', {usersItems:usersItems})
+            })
           })
-        })
-      })
+  
+      } else {
+        //ejs if/else fail so using this render
+        res.render('view-none')
+      }
+    })
+
     })
 
 // // making an item

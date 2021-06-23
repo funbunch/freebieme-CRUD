@@ -58,9 +58,20 @@ h2 {
   color: rgb(72,166,127);
   margin-bottom: 2rem;
 }
+h6 {
+  margin-bottom: 1rem;
+}
 
 p, label { 
   color: #ffffff;
+}
+.navbar p {
+  color:rgb(72,166,127);
+  font-family: 'Lobster', cursive;
+  font-size: 18px;
+  margin-bottom: 0;
+  margin-right: 5px;
+
 }
 .strike {
   text-decoration: line-through;
@@ -101,8 +112,30 @@ footer p {
     user-select: none;
   }
 
+
+@media (max-width: 768px) {
+  .copy {
+    padding-left: 25px;
+    padding-right: 25px;
+  }  
+  .item-post {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .navbar {
+    justify-content: center;
+  }
+  .navbar p {
+    margin-bottom: .5rem;
+  }
+  .logo h1 {
+    padding-top:120px;
+}
+
   @media (min-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
+    
   }
+
